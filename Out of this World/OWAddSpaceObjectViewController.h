@@ -10,4 +10,15 @@
 
 @interface OWAddSpaceObjectViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITextField *nameTextField;
+
+@property (strong, nonatomic) IBOutlet UITextField *nicknameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *diameterTextField;
+@property (strong, nonatomic) IBOutlet UITextField *temperatureTextField;
+@property (strong, nonatomic) IBOutlet UITextField *numberOfMoonsTextField;
+@property (strong, nonatomic) IBOutlet UITextField *interestingFactTextField;
+- (IBAction)cancelButton:(UIButton *)sender;
+- (IBAction)addButton:(UIButton *)sender;
+
+
 @end

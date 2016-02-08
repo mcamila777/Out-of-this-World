@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OWSpaceObject.h"
 
-@interface SpaceImageViewController : UIViewController
+// <protocol>, if it's made in the .h is public, while on the .m is private
+
+@interface SpaceImageViewController : UIViewController <UIScrollViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) OWSpaceObject *spaceObject;
+
 
 @end

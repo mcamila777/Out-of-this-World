@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIImage *orionImage = [UIImage imageNamed:@"Orion.jpg"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:orionImage];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +37,9 @@
 }
 */
 
+- (IBAction)cancelButton:(UIButton *)sender {
+}
+
+- (IBAction)addButton:(UIButton *)sender {
+}
 @end
