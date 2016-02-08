@@ -7,11 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OWSpaceObject.h"
+
+// Create a protocol
+@protocol OWAddSpaceObjectViewControllerDelegate <NSObject>
+
+//Is requiered to implemet both methos, else the app while crash
+@required //@optional
+-(void)addSpaceObject:(OWSpaceObject *)spaceObject;
+-(void)didCancel;
+
+@end
 
 @interface OWAddSpaceObjectViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 
+//Delegates has to be weak
+@property (weak, nonatomic) id <OWAddSpaceObjectViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *nicknameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *diameterTextField;
 @property (strong, nonatomic) IBOutlet UITextField *temperatureTextField;

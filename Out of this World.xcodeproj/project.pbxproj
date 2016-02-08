@@ -95,9 +95,9 @@
 			children = (
 				410D4FD71C5A63CD0088E0B8 /* AppDelegate.h */,
 				410D4FD81C5A63CD0088E0B8 /* AppDelegate.m */,
+				410D4FDD1C5A63CD0088E0B8 /* Main.storyboard */,
 				410D4FEB1C5A65260088E0B8 /* OuterSpaceTableViewController.h */,
 				410D4FEC1C5A65260088E0B8 /* OuterSpaceTableViewController.m */,
-				410D4FDD1C5A63CD0088E0B8 /* Main.storyboard */,
 				41AF9ABC1C6823AC00D21093 /* OWAddSpaceObjectViewController.h */,
 				41AF9ABD1C6823AD00D21093 /* OWAddSpaceObjectViewController.m */,
 				418422BC1C63ECE0004851B6 /* OWSpaceDataViewController.h */,

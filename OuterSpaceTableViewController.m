@@ -18,6 +18,22 @@
 
 @implementation OuterSpaceTableViewController
 
+#pragma mark - Lazy Instantiation of properties
+
+//si aún no existe el arreglo, este es alocado en memoria e inicializado
+-(NSMutableArray *)planets{
+    if (!_planets) {
+        _planets = [[NSMutableArray alloc] init];
+    }
+    return _planets;
+}
+
+-(NSMutableArray *)addedSpaceObjects{
+    if (!_addedSpaceObjects) {
+        _addedSpaceObjects = [[NSMutableArray alloc] init];
+    }
+    return _addedSpaceObjects;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -31,7 +47,7 @@
 
     //Create the _planets array, which will content the OWSpaceObject objects, one object for each planet
     
-    _planets = [[NSMutableArray alloc] init];
+    //_planets = [[NSMutableArray alloc] init];
     
     //The method [AstronomicalData allKnownPlanets] returns an array of dictionaries, with the information of each planet on each dictionary
     //the for loop "recorre" all the array passing through each planet dictionary
@@ -48,7 +64,7 @@
         OWSpaceObject *planet = [[OWSpaceObject alloc] initWithData:planetData andImage:[UIImage imageNamed:imageName]];
         
         //add this planet to the planets array
-        [_planets addObject:planet];
+        [self.planets addObject:planet];
     }
     
     
@@ -87,7 +103,13 @@
             SpaceImageViewController *nextViewController = segue.destinationViewController;
             //get the current IndexPath
             NSIndexPath *path = [self.tableView indexPathForCell:sender];
-            OWSpaceObject *selectedObject =_planets[path.row];
+            OWSpaceObject *selectedObject ;
+            
+            if (path.section==0) {
+                selectedObject =_planets[path.row];
+            }else if (path.section ==1){
+                selectedObject = _addedSpaceObjects[path.row];
+            }
 //            nextViewController.imageView.image = selectedObject.spaceImage; //Doesnt works
             nextViewController.spaceObject = selectedObject;
             
@@ -100,10 +122,24 @@
         if ([segue.destinationViewController isKindOfClass:[OWSpaceDataViewController class]]) {
             OWSpaceDataViewController *targetViewController = segue.destinationViewController;
             NSIndexPath *path = sender;
-            OWSpaceObject *selectedObject = _planets[path.row];
+            OWSpaceObject *selectedObject ;
+            
+            if (path.section==0) {
+                selectedObject =_planets[path.row];
+            }else if (path.section ==1){
+                selectedObject = _addedSpaceObjects[path.row];
+            }
+            
             targetViewController.spaceObjetc = selectedObject;
             
         }
+    }
+    
+    if ([segue.destinationViewController isKindOfClass:[OWAddSpaceObjectViewController class]]) {
+        
+        OWAddSpaceObjectViewController *addSpaceObjectVC = segue.destinationViewController;
+        addSpaceObjectVC.delegate = self;
+        
     }
 }
 
@@ -111,6 +147,29 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - OWAddSpaceObjectViewController Delegate
+
+-(void)didCancel {
+    
+    NSLog(@"did Cancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+-(void)addSpaceObject:(OWSpaceObject *)spaceObject{
+    
+//    //si aún no existe el arreglo, este es alocado en memoria e inicializado
+//    if (!self.addedSpaceObjects) {
+//        self.addedSpaceObjects = [[NSMutableArray alloc] init];
+//    }
+    [self.addedSpaceObjects addObject:spaceObject];
+    NSLog(@"add object");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.tableView reloadData];
+}
+
+
 
 #pragma mark - Table view data source
 
@@ -144,6 +203,13 @@
     
     if (indexPath.section ==1) {
         //Use New Space Object to customize our cell
+        OWSpaceObject *planet = [self.addedSpaceObjects objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = planet.name;
+        cell.detailTextLabel.text = planet.nickname;
+        cell.imageView.image = planet.spaceImage;
+
+        
     }else{
     
         // Take the planet object that is on the position of the current row (indexPath.row) and asign it to a new object of the same type (OWSpaceObject)
