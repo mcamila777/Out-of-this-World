@@ -51,13 +51,13 @@
                     <navigationItem key="navigationItem" title="Planets" id="hIW-ni-bmC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Cjt-HA-cNY">
                             <connections>
-                                <segue destination="IVP-EI-nRn" kind="modal" id="3NG-vd-NuL"/>
+                                <segue destination="IVP-EI-nRn" kind="showDetail" id="3NG-vd-NuL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <segue destination="2Rx-E8-yc0" kind="push" identifier="push to space data" id="XHd-Sh-OBw"/>
+                        <segue destination="2Rx-E8-yc0" kind="show" identifier="push to space data" id="XHd-Sh-OBw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRA-4l-oeg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -238,7 +238,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z0g-yh-2E6">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z0g-yh-2E6">
                                                     <rect key="frame" x="326" y="12" width="42" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
