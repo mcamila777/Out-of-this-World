@@ -162,13 +162,26 @@
 //    if (!self.addedSpaceObjects) {
 //        self.addedSpaceObjects = [[NSMutableArray alloc] init];
 //    }
+    
     [self.addedSpaceObjects addObject:spaceObject];
     NSLog(@"add object");
+    
+    // Will save to NSUserDefaults here
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.tableView reloadData];
 }
 
+#pragma mark - Helper Methods
+-(NSDictionary *) spaceObjectAsAPropertyList:(OWSpaceObject *)spaceObjec{
+
+    NSData *imageData  = UIImagePNGRepresentation(spaceObjec.spaceImage);
+    
+    NSDictionary *dictonary = @{PLANET_NAME : spaceObjec.name , PLANET_GRAVITY : @(spaceObjec.gravitationalForce), PLANET_DIAMETER : @(spaceObjec.diameter), PLANET_YEAR_LENGTH : @(spaceObjec.yearLength) , PLANET_DAY_LENGTH: @(spaceObjec.dayLength), PLANET_TEMPERATURE: @(spaceObjec.temperature) , PLANET_NUMBER_OF_MOONS : @(spaceObjec.numberOfMoons), PLANET_NICKNAME : spaceObjec.nickname , PLANET_INTERESTING_FACT : spaceObjec.interestFact , PLANET_IMAGE : imageData};
+    
+    return dictonary;
+
+}
 
 
 #pragma mark - Table view data source
